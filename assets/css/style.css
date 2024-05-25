@@ -1,0 +1,444 @@
+/*=======================================================
+Copyright (c) 2024. Alejandro Alberto Jiménez Brundin
+=======================================================*/
+body {
+  background-color: #e2e2e2;
+  min-height: 100vh;
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 230, 230, 1) 100%
+  );
+  overflow: hidden;
+  background-image: url('../../assets/img/92236754-mesa-de-póker.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.hecho {
+  color: rgb(255, 255, 255);
+  font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+/* sentido de giro */
+
+.table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 220px);
+  transform: translateY(-58%);
+}
+
+.table ion-icon {
+  font-size: 440px;
+  opacity: 0.4;
+
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.8));
+
+  animation: mymove 10s linear infinite;
+  -webkit-animation: mymove 10s linear infinite;
+
+  transform-origin: 50% 58%;
+}
+
+@keyframes mymove {
+  0% {
+    transform: rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateY(0deg) rotateZ(360deg);
+  }
+}
+
+@keyframes mymove2 {
+  0% {
+    transform: rotateY(180deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateY(180deg) rotateZ(3600deg);
+  }
+}
+
+.inverse.table ion-icon {
+  animation: mymove2 100s linear infinite;
+  -webkit-animation: mymove2 100s linear infinite;
+}
+
+/* espacao para carta na mesa */
+
+.table-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 57px);
+  transform: translateY(-50%);
+}
+
+.table-card .card {
+  position: absolute;
+  left: 50%;
+}
+
+/* espaco para cartas do usuario */
+
+.cards-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* background-color: salmon; */
+
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* todas as cartas visibles */
+
+.card {
+  min-width: 110px;
+  width: 110px;
+  height: 146px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid black;
+  border-radius: 7px;
+  box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.8);
+
+  transition: all 0.5s;
+
+  z-index: 0;
+}
+
+.cards-container .card {
+  margin-bottom: -10px;
+  margin-left: -8px;
+}
+
+.cards-container .card:first-child {
+  margin-left: 0px;
+}
+
+/* efeitos para quando é a vez do usuario */
+
+.my-turn.card {
+  box-shadow: -1px 11px 12px rgba(0, 0, 0, 0.85);
+  transform: translateY(-7px);
+  cursor: pointer;
+}
+
+.my-turn.card:hover ~ .card {
+  transform: translateX(7px);
+}
+
+.my-turn.card:hover ~ .my-turn.card {
+  transform: translateX(7px) translateY(-7px);
+}
+
+.my-turn.card:hover {
+  transform: translateY(-14px);
+}
+
+/* elipse no meio da carta */
+
+.card:before {
+  content: "";
+
+  width: 78px;
+  height: 120px;
+
+  border-radius: 39px;
+  border: 2px solid white;
+
+  background-color: rgb(202, 52, 52);
+
+  position: absolute;
+  transform: rotateZ(10deg);
+
+  box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.8),
+    inset 0 0 5px rgba(255, 255, 255, 0.8);
+
+  z-index: 1;
+}
+
+/* simbolo da carta */
+
+.logo {
+  color: white;
+  font-size: 65px;
+
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.8));
+
+  z-index: 2;
+}
+
+/*  */
+/*  */
+/*  */
+
+.winner.player-2 .card,
+.winner.player-3 .card,
+.winner.player-4 .card {
+  border: 2px solid green;
+  box-shadow: 0px 0px 10px rgba(0, 255, 0, 1);
+}
+
+.winner.player-2 .card .logo,
+.winner.player-3 .card .logo,
+.winner.player-4 .card .logo {
+  font-size: 54px;
+  filter: drop-shadow(0px 0px 2px rgb(2, 199, 2));
+  -webkit-filter: drop-shadow(0px 0px 2px rgb(2, 199, 2));
+}
+
+.player-2,
+.player-3,
+.player-4 {
+  width: 250px;
+  height: 250px;
+  font-size: 30px;
+  position: absolute;
+  margin: 10px;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.turnOf.player-2 .light,
+.turnOf.player-3 .light,
+.turnOf.player-4 .light {
+  border: 1px solid green;
+  background-color: rgb(18, 199, 18);
+}
+
+.blocked.player-2 .light,
+.blocked.player-3 .light,
+.blocked.player-4 .light {
+  border: 1px solid orangered;
+  background-color: rgb(252, 135, 40);
+}
+
+.player-2 .light,
+.player-3 .light,
+.player-4 .light {
+  width: 20px;
+  height: 20px;
+  background-color: lightgrey;
+  border: 1px solid gray;
+  margin: 10px 10px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.8);
+  transition: all 0.4s;
+}
+
+.player-2 {
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.player-3 {
+  top: 0px;
+  left: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.player-4 {
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.choose-color-window {
+  background-color: rgba(43, 43, 43, 0.788);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.choose-color-window.hide {
+  display: none;
+}
+
+.colors-container {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: rgb(121, 121, 121);
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.color {
+  box-sizing: border-box;
+  width: 50%;
+  height: 50%;
+  transform: scale(0.98);
+  border: 1px solid black;
+
+  transition: all 0.4s;
+}
+
+.color:hover {
+  transform: scale(1.02);
+}
+
+.color.red {
+  background-color: darkred;
+  border-radius: 100% 3% 3% 3%;
+  filter: drop-shadow(-2px -2px 2px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(-2px -2px 2px rgba(0, 0, 0, 0.8));
+}
+
+.color.yellow {
+  background-color: orange;
+  border-radius: 3% 100% 3% 3%;
+  filter: drop-shadow(2px -2px 2px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(2px -2px 2px rgba(0, 0, 0, 0.8));
+}
+
+.color.green {
+  background-color: darkgreen;
+  border-radius: 3% 3% 3% 100%;
+  filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.8));
+}
+
+.color.blue {
+  background-color: darkblue;
+  border-radius: 3% 3% 100% 3%;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.8));
+}
+
+.color.red:hover {
+  background-color: rgb(199, 3, 3);
+  filter: drop-shadow(-4px -4px 4px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(-4px -4px 4px rgba(0, 0, 0, 0.8));
+}
+
+.color.yellow:hover {
+  background-color: rgb(255, 230, 0);
+  filter: drop-shadow(4px -4px 4px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(4px -4px 4px rgba(0, 0, 0, 0.8));
+}
+
+.color.green:hover {
+  background-color: rgb(2, 172, 2);
+  filter: drop-shadow(-4px 4px 4px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(-4px 4px 4px rgba(0, 0, 0, 0.8));
+}
+
+.color.blue:hover {
+  background-color: rgb(0, 0, 185);
+  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.8));
+  -webkit-filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.8));
+}
+
+.deck {
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 170px;
+}
+
+.deck .card.frente {
+  transform: scale(0.9) rotateY(180deg);
+  margin: 5px 5px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.deck .card.verso {
+  background-color: rgb(145, 107, 107);
+  transform: scale(0.9);
+  margin: 5px 5px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  background-image: url('../../assets/img/back.png');
+  background-size: cover;
+}
+
+.deck .card.verso .logo {
+  font-size: 32px;
+}
+
+.deck.my-time .card.verso {
+  border: 1px solid rgb(7, 177, 83);
+  box-shadow: 0px 0px 10px rgb(40, 252, 135);
+
+  animation: my-deck-animation 1s infinite;
+  -webkit-animation: my-deck-animation 1s infinite;
+}
+
+@keyframes my-deck-animation {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+.deck.my-time .card.verso:hover {
+  cursor: pointer;
+}
+
+.deck.turned .card.frente {
+  transform: scale(0.9) rotateY(0deg);
+}
+
+.deck.turned .card.verso {
+  transform: scale(0.9) rotateY(180deg);
+}
+
+.player-2 .card,
+.player-3 .card,
+.player-4 .card {
+  background-color: rgb(195, 0, 0);
+  border-radius: 15px;
+  background-image: url('../../assets/img/back.png');
+  background-size: cover;
+  transform: scale(0.9);
+}
+/*=======================================================
+Copyright (c) 2024. Alejandro Alberto Jiménez Brundin
+=======================================================*/
