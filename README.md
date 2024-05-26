@@ -1,4 +1,4 @@
-# Juego UNO
+# Juego UNO (EN DESARROLLO)
  Juego de cartas UNO hecho con Javascript, HTML & CSS.
 
 ## DEMO
